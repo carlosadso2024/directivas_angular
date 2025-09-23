@@ -1,0 +1,52 @@
+.catalogo{
+    gap: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.contenedor{
+    width: 20rem;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: bisque;
+    text-align: center;
+    justify-content: center;
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+.titulo{
+    margin: 1rem;
+}
+
+.contenedor-descripcion{
+    background-color: white;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+}
+
+.descripcion{
+    margin: 0;
+}
+
+.contenedor-precio{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.contenedor-form{
+    width: 50%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+}
+
+.formulario{
+    display: flex;
+    flex-direction: column;
+}
