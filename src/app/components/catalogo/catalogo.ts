@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Producto } from '../../types/productos.types';
+import { ProductosService } from '../../add-product';
 
 @Component({
   selector: 'app-catalogo',
@@ -13,71 +14,13 @@ export class Catalogo {
   descripcionInput: string = '';
   stockInput: number = 0;
 
+  // Inyección del servicio en el constructor
+  constructor(private productosService: ProductosService) {}
 
-
-  productos: Producto[] = [
-    {
-      nombre: "Teclado",
-      precio: 50000,
-      descripcion: "Teclado Logitech 20234",
-      stock: 50
-    },
-    {
-      nombre: "Mouse",
-      precio: 15000,
-      descripcion: "Mouse inalámbrico Logitech MX Master 3",
-      stock: 100
-    },
-    {
-      nombre: "Monitor",
-      precio: 150000,
-      descripcion: "Monitor Samsung Curvo 27 pulgadas",
-      stock: 30
-    },
-    {
-      nombre: "Laptop",
-      precio: 1200000,
-      descripcion: "Laptop Dell XPS 15, procesador i7",
-      stock: 20
-    },
-    {
-      nombre: "Auriculares",
-      precio: 45000,
-      descripcion: "Auriculares inalámbricos Sony WH-1000XM4",
-      stock: 70
-    },
-    {
-      nombre: "Cámara Web",
-      precio: 25000,
-      descripcion: "Cámara web Logitech C920 HD Pro",
-      stock: 40
-    },
-    {
-      nombre: "Tablet",
-      precio: 300000,
-      descripcion: "Tablet Samsung Galaxy Tab S6",
-      stock: 15
-    },
-    {
-      nombre: "Disco Duro Externo",
-      precio: 80000,
-      descripcion: "Disco duro externo Seagate 1TB",
-      stock: 60
-    },
-    {
-      nombre: "Smartphone",
-      precio: 500000,
-      descripcion: "Smartphone Samsung Galaxy S21",
-      stock: 50
-    },
-    {
-      nombre: "Mochila para Laptop",
-      precio: 20000,
-      descripcion: "Mochila Samsonite para laptop 15 pulgadas",
-      stock: 80
-    }
-  ]
-
+  // Getter para acceder a los productos del servicio
+  get productos(): Producto[] {
+    return this.productosService.obtenerProductos();
+  }
 
   agregarProducto() {
     const nuevoProducto: Producto = {
@@ -87,8 +30,10 @@ export class Catalogo {
       stock: this.stockInput
     };
 
-    this.productos.push(nuevoProducto);
+    // Usar el servicio para agregar el producto
+    this.productosService.agregarProducto(nuevoProducto);
 
+    // Limpiar los inputs
     this.nombreInput = '';
     this.precioInput = 0;
     this.descripcionInput = '';
@@ -97,14 +42,8 @@ export class Catalogo {
 
   eliminarProducto(producto: Producto | null) {
     if (producto) {
-      const index = this.productos.findIndex(p => 
-        p.nombre === producto.nombre && 
-        p.precio === producto.precio && 
-        p.descripcion === producto.descripcion
-      );
-      if (index > -1) {
-        this.productos.splice(index, 1);
-      }
+      // Usar el servicio para eliminar el producto
+      this.productosService.eliminarProducto(producto);
     }
   }
 }
